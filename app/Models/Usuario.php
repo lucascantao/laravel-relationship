@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Usuario extends Model
 {
     use HasFactory;
 
     protected $fillable = ['name'];
 
     /**
-     * The usuarios that belong to the Role
+     * The roles that belong to the Usuario
      */
-    public function usuarios(): BelongsToMany
+    public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Usuario::class, 'role_usuarios');
+        return $this->belongsToMany(Role::class, 'role_usuarios');
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Usuario;
 
 Route::get('/', function () {
-    return view('welcome');
+    return Usuario::with('roles')->find(2);
 });
