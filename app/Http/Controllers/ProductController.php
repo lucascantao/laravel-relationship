@@ -29,4 +29,23 @@ class ProductController extends Controller
         $newProduct = Product::create($data);
         return redirect()->route('products.index')->with('success', 'Product Saved');
     }
+
+    function edit(Product $product) {
+
+        return view('products.edit',['product' => $product]);
+    }
+
+    function update(Product $product, Request $request) {
+
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+        ]);
+
+        $data['price'] = str_replace(array('R$','.',','), array('','','.'),$data['price']);
+
+        $product->update($data);
+        return redirect()->route('products.index')->with('success', 'Product Saved');
+    }
 }

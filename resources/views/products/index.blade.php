@@ -16,6 +16,9 @@
               <div class="col">
                 <p>Price</p>
               </div>
+              <div class="col">
+                
+              </div>
             </div>
           </div>
         @foreach ($products as $product) 
@@ -34,7 +37,7 @@
                     <p>{{ 'R$' . number_format($product->price, 2, ",", ".")}}</p>
                   </div>
                   <div class="col">
-                    <a href=""><button class="btn btn-warning">Edit</button></a>
+                    <a href="{{route('products.edit', ['product' => $product])}}"><button class="btn btn-warning">Edit</button></a>
                   </div>
 
                 </div>
