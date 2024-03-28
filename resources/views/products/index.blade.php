@@ -11,7 +11,7 @@
                 <p>Name</p>
               </div>
               <div class="col">
-                <p>Description</p>
+                <p>Category</p>
               </div>
               <div class="col">
                 <p>Price</p>
@@ -31,7 +31,9 @@
                     <p>{{$product->name}}</p>
                   </div>
                   <div class="col">
-                    <p>{{$product->description}}</p>
+                    @foreach ($product->categories as $category)
+                        <p class="text-secondary border bg-body-tertiary">{{$category->name}}</p>
+                    @endforeach
                   </div>
                   <div class="col">
                     <p>{{ 'R$' . number_format($product->price, 2, ",", ".")}}</p>
