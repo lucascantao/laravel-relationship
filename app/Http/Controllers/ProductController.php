@@ -71,7 +71,7 @@ class ProductController extends Controller
     }
 
     function destroy(Product $product) {
-        $product->truncate();
+        $product->delete();
         return redirect()->route('products.index')->with('success', 'Product Deleted');
     }
 }

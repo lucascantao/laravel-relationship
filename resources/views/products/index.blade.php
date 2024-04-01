@@ -44,11 +44,14 @@
                   <div class="col">
                     <a href="{{route('products.edit', ['product' => $product])}}"><button class="btn btn-warning">Edit</button></a>
                   </div>
-                  <form action="{{route('products.destroy', ['product'=>$product])}}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <input type="submit" value="delete">
-                  </form>
+                  <div class="col">  
+                    <form action="{{route('products.destroy', ['product'=>$product])}}" method="POST">
+                      @csrf
+                      @method('delete')
+                      <input type="submit" value="delete" class="btn btn-danger">
+                    </form>
+                    {{-- <a href="{{route('products.destroy', ['product' => $product])}}"><button class="btn btn-danger">Delete</button></a> --}}
+                  </div>
 
                 </div>
               </div>
