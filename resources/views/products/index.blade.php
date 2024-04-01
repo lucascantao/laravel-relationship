@@ -1,31 +1,36 @@
 @extends('layouts.app')
 @section('title', 'products')
 @section('content')
-    <div class="container mt-3">
-        <div class="container text-center">
-            <div class="row">
-              <div class="col">
-                <p>ID</p>
-              </div>
-              <div class="col">
-                <p>Name</p>
-              </div>
-              <div class="col">
-                <p>Category</p>
-              </div>
-              <div class="col">
-                <p>Price</p>
-              </div>
-              <div class="col">
-                
-              </div>
-              <div class="col">
-                
-              </div>
-            </div>
-          </div>
+    <table class="table container">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">category</th>
+          <th scope="col">price</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
         @foreach ($products as $product) 
-            <div class="container text-center">
+        <tr>
+          <th scope="row">{{$product->id}}</th>
+          <td>{{$product->name}}</td>
+          <td>
+            @foreach ($product->categories as $category)
+              {{$category->name}}
+            @endforeach
+          </td>
+          <td>{{ 'R$' . number_format($product->price, 2, ",", ".")}}</td>
+          <td><a href="{{route('products.edit', ['product' => $product])}}"><button class="btn btn-warning">Edit</button></a></td>
+          <td><form action="{{route('products.destroy', ['product'=>$product])}}" method="POST">
+            @csrf
+            @method('delete')
+            <input type="submit" value="delete" class="btn btn-danger">
+          </form></td>
+        </tr>
+            {{-- <div class="container text-center">
                 <div class="row border-bottom">
                   <div class="col">
                     <p>{{$product->id}}</p>
@@ -50,11 +55,13 @@
                       @method('delete')
                       <input type="submit" value="delete" class="btn btn-danger">
                     </form>
-                    {{-- <a href="{{route('products.destroy', ['product' => $product])}}"><button class="btn btn-danger">Delete</button></a> --}}
+                    <a href="{{route('products.destroy', ['product' => $product])}}"><button class="btn btn-danger">Delete</button></a>
                   </div>
 
                 </div>
-              </div>
+              </div> --}}
         @endforeach
-    </div>
+      </tbody>
+    </table>
+        
 @endsection
