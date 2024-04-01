@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); //isso n vai funcionar kkkk
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });

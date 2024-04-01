@@ -19,6 +19,9 @@
               <div class="col">
                 
               </div>
+              <div class="col">
+                
+              </div>
             </div>
           </div>
         @foreach ($products as $product) 
@@ -41,6 +44,11 @@
                   <div class="col">
                     <a href="{{route('products.edit', ['product' => $product])}}"><button class="btn btn-warning">Edit</button></a>
                   </div>
+                  <form action="{{route('products.destroy', ['product'=>$product])}}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <input type="submit" value="delete">
+                  </form>
 
                 </div>
               </div>

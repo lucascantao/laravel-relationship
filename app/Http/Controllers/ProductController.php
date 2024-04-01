@@ -69,4 +69,9 @@ class ProductController extends Controller
         $product->categories()->sync($data['categories']);
         return redirect()->route('products.index')->with('success', 'Product Saved');
     }
+
+    function destroy(Product $product) {
+        $product->truncate();
+        return redirect()->route('products.index')->with('success', 'Product Deleted');
+    }
 }
