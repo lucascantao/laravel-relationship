@@ -12,13 +12,70 @@
 
         <!-- Styles -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+        
+        <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+        
+        <!-- Mask Money -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/2.0.0/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.3.0/css/searchPanes.dataTables.min.css">
     </head>
     <body>
         @include('layouts.include.header')
-        @yield('content')       
+        @yield('content')
+
+        <!-- bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        
+        
+        <!-- DataTables -->
+        <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/select/2.0.0/js/dataTables.select.min.js"></script>
+        <script src="https://cdn.datatables.net/searchpanes/2.3.0/js/dataTables.searchPanes.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable({
+                    fixedHeader: {
+                        header:true,
+                        footer: true,
+                    },
+                    initComplete: function () {
+                        this.api()
+                            .columns()
+                            .every(function () {
+                                let col = this;
+                                let title = col.footer().textContent;
+
+                                let input = document.createElement('input');
+                                input.placeholder = title;
+                                col.footer().replaceChildren(input);
+
+                                input.addEventListener('keyup', () => {
+                                    if (col.search() !== this.value) {
+                                        col.search(input.value).draw();
+                                    }
+                                });
+                            })
+                    },
+
+                    select: true,
+                    // dom: 'Pfrtip',
+                    layout: {
+                        // top1: {
+                        //     searchPanes: {
+                        //         // layout: 'columns-2',
+                        //         controls: false
+                        //     }
+                        // },
+                        top1End: 'search',
+                        topEnd: 'paging'
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
