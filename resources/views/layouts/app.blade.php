@@ -37,45 +37,21 @@
         <script src="https://cdn.datatables.net/select/2.0.0/js/dataTables.select.min.js"></script>
         <script src="https://cdn.datatables.net/searchpanes/2.3.0/js/dataTables.searchPanes.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('#myTable').DataTable({
-                    fixedHeader: {
-                        header:true,
-                        footer: true,
-                    },
-                    initComplete: function () {
-                        this.api()
-                            .columns()
-                            .every(function () {
-                                let col = this;
-                                let title = col.footer().textContent;
+            var datatables = $('#myTable').DataTable({
 
-                                let input = document.createElement('input');
-                                input.placeholder = title;
-                                col.footer().replaceChildren(input);
-
-                                input.addEventListener('keyup', () => {
-                                    if (col.search() !== this.value) {
-                                        col.search(input.value).draw();
-                                    }
-                                });
-                            })
-                    },
-
-                    select: true,
-                    // dom: 'Pfrtip',
+                    
                     layout: {
-                        // top1: {
-                        //     searchPanes: {
-                        //         // layout: 'columns-2',
-                        //         controls: false
-                        //     }
-                        // },
-                        top1End: 'search',
-                        topEnd: 'paging'
+                        topEnd: null
                     }
                 });
-            });
+                
+            $('#product_name').on('keyup', function() {
+                datatables.search(this.value).draw();
+            })
+            $('#product_price').on('keyup', function() {
+                datatables.column(3).search(this.value).draw();
+            })
+            
         </script>
     </body>
 </html>
